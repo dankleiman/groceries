@@ -1,55 +1,10 @@
 <h1>Shopping List</h1>
 
-<h3>Produce</h3>
+<% @items.each do |item|  %>
+<h3><%= item[:section].capitalize %></h3>
 <ul>
-<% @items.each do |item| %>
-  <% if item[:section] == "produce" %>
-  <li><%=item[:item] %></li>
+  <% item[:items].each do |item| %>
+  <li><%=item%></li>
   <%end%>
-<%end%>
 </ul>
-
-<h3>Meat</h3>
-<ul>
-<% @items.each do |item| %>
-  <% if item[:section] == "meat" %>
-  <li><%=item[:item] %></li>
-  <%end%>
 <%end%>
-</ul>
-
-<h3>Dairy</h3>
-<ul>
-<% @items.each do |item| %>
-  <% if item[:section] == "dairy" %>
-  <li><%=item[:item] %></li>
-  <%end%>
-<%end%>
-</ul>
-
-<h3>Bakery</h3>
-<ul>
-<% @items.each do |item| %>
-  <% if item[:section] == "bakery" %>
-  <li><%=item[:item] %></li>
-  <%end%>
-<%end%>
-</ul>
-
-<h3>Aisles</h3>
-<ul>
-<% @items.each do |item| %>
-  <% if item[:section] == "aisles" %>
-  <li><%=item[:item] %></li>
-  <%end%>
-<%end%>
-</ul>
-
-<h3>Other</h3>
-<ul>
-<% @items.each do |item| %>
-  <% if item[:section] == nil %>
-  <li><%=item[:item] %></li>
-  <%end%>
-<%end%>
-</ul>
