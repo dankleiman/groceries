@@ -1,5 +1,5 @@
 body {
-    /* Use a "Matrix"-style color scheme. */
+
     background-color: #fff;
     color:  #4198d9;
 
@@ -7,7 +7,7 @@ body {
     font-size: 1.5em;
 }
 
-ul {
+.nav ul {
     list-style: none;
     padding: 0px;
 }
@@ -19,3 +19,13 @@ ul {
 }
 
 
+form {
+    width: 300px;
+    border: 5px solid #4198d9;
+    padding: 20px;
+}
+
+.item_list {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
