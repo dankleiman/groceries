@@ -2,7 +2,7 @@ require 'sinatra'
 require 'csv'
 require 'pry'
 
-def get_list
+def get_default_list
   items = []
   items_by_section = []
   area_in_store = ['produce', 'meat', 'dairy', 'aisles', 'bakery', 'other']
@@ -25,19 +25,37 @@ def get_list
   items_by_section
 end
 
-
-#suggested data structure
-#   sections: [
-#   {section: 'Produce', items: []},
-#   {section: 'Meat', items: []},
-#   {section: 'Dairy', items: []}
-# ]
-
-
-
+def get_new_list
+  items = []
+  CSV.foreach('public/list.csv', headers: true, header_converters: :symbol) do |item|
+    items << item
+  end
+  items
+end
 
 
 get '/' do
-  @items = get_list
   erb :index
+end
+
+get '/lists' do
+  @items = get_new_list
+  erb :'lists/show'
+end
+
+get '/new' do
+  @items = get_default_list
+  # binding.pry
+  erb :'lists/new'
+end
+
+post '/new' do
+  CSV.open('public/list.csv', "w") do |csv|
+    csv << ["item"]
+    params.each do | item_key, item_value|
+    csv << [item_value]
+  end
+
+  end
+  redirect '/lists'
 end

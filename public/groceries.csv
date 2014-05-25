@@ -1,14 +1,14 @@
-item,section,quantity,notes
-bananas,produce,,,
-coffee,other,,,
-eggs,dairy,,,
-milk,dairy,,,
-formula,aisles,,,
-baby oatmeal,aisles,,,
-avocados,produce,,,
-bread,bakery,1,mult-grain
-cabbage,produce,,,
-peanut butter,aisles,,,
-yogurt,dairy,,,
-chicken thighs,meat,,,
-bacon,meat,,,
+item,section
+bananas,produce
+coffee,other
+eggs,dairy
+milk,dairy
+formula,aisles
+baby oatmeal,aisles
+avocados,produce
+bread,bakery
+cabbage,produce
+peanut butter,aisles
+yogurt,dairy
+chicken thighs,meat
+bacon,meat

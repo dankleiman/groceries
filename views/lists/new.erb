@@ -1,0 +1,14 @@
+<form action="/new" method="post">
+
+
+  <div>
+    <label for="list">Add Items to the List: </label><br/>
+    <% @items.each do |item|  %>
+      <% item[:items].each do |item| %>
+        <input type="checkbox" name="<%=item%>" value="<%=item%>"><%=item%><br/>
+      <%end%>
+    <%end%>
+  </div>
+
+  <input type="submit" value="Create a New List"/>
+</form>
