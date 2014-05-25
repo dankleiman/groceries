@@ -59,3 +59,18 @@ post '/new' do
   end
   redirect '/lists'
 end
+
+
+get '/new_item' do
+  @items = get_default_list
+  erb :'items/new'
+end
+
+post '/new_item' do
+  item = params[:new_item]
+  section = params[:section]
+  binding.pry
+  CSV.open('public/groceries.csv', "a") {|csv| csv << [item,section]}
+  redirect '/new_item'
+end
+

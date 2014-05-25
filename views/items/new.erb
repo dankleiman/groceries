@@ -1,0 +1,32 @@
+<form action="/new_item" method="post">
+  <div>
+    <label for="new_item">Add an Item to the Default List:</label>
+    <input type="text" name="new_item" value="<%=params[:new_item]%>"/>
+  </div>
+
+  <div>
+    <label for="section">Add to Section:</label>
+    <select name="section">
+    <% @items.each do |item| %>
+    <option value="<%=item[:section]%>"><%=item[:section].capitalize%></option>
+    <%end%>
+    </select>
+  </div>
+
+  <input type="submit" value="Add a New Item"/>
+</form>
+
+
+<h2>Current Default List</h2>
+<% @items.each do |item| %>
+<h3><%=item[:section].capitalize%></h3>
+  <%item[:items].each do |item|%>
+  <ul>
+    <li><%=item%></li>
+  </ul>
+  <%end%>
+<%end%>
+
+
+
+

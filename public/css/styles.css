@@ -1,0 +1,21 @@
+body {
+    /* Use a "Matrix"-style color scheme. */
+    background-color: #fff;
+    color:  #4198d9;
+
+    font-family: monospace;
+    font-size: 1.5em;
+}
+
+ul {
+    list-style: none;
+    padding: 0px;
+}
+
+.nav li {
+  display: inline-block;
+  list-style: none;
+  margin-right: 20px;
+}
+
+
