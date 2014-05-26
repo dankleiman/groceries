@@ -1,5 +1,7 @@
+<h1>Start a New List</h1>
+
 <form action="/new" method="post">
-  <label for="list">Add Items to the List: </label>
+  <label for="list">Select Items: </label>
   <div class="item_list">
     <% @items.each do |item|  %>
       <% item[:items].each do |item| %>
@@ -7,5 +9,6 @@
       <%end%>
     <%end%>
   </div>
+  <p class="helper_text">Want to add a different item? You can add a one-time item on the next page or <a href="/new_item">update the default list</a>.</p><br/>
   <input type="submit" value="Create a New List"/>
 </form>

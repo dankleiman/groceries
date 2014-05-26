@@ -69,8 +69,14 @@ end
 post '/new_item' do
   item = params[:new_item]
   section = params[:section]
-  binding.pry
+  # binding.pry
   CSV.open('public/groceries.csv', "a") {|csv| csv << [item,section]}
   redirect '/new_item'
+end
+
+post '/temp_item' do
+  item = params[:new_item]
+  CSV.open('public/list.csv', "a") {|csv| csv << [item]}
+  redirect '/lists'
 end
 
