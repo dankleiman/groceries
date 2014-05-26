@@ -1,12 +1,13 @@
 Grocery Shopping
 ================
 
-Make shopping easier:
+Make shopping easier with current features:
 
 - Generate a new list based on commmon purchases
 - Add special items for this trip
-- Specify quanitities or other notes about each item
-- Order list based on specific grocery store layouts
+
+Make shopping EVEN easier with future, planned features:
+
 - Automatically send list to shopper
 - Hide items you've added to cart
 
