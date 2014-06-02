@@ -85,6 +85,12 @@ def add_new_item(item, section_id)
   end
 end
 
+def new_list(list_of_items)
+  db_connection do |conn|
+    conn.exec_params("INSERT INTO lists (items, created_at) VALUES ($1, NOW())", [list_of_items])
+  end
+end
+
 def section_list
   db_connection do |conn|
     conn.exec('SELECT sections.section, sections.id FROM sections')
@@ -110,9 +116,14 @@ get '/new' do
   erb :'lists/new'
 end
 
-#### REWRITE THIS METHOD TO INSERT A NEW SET OF ITEMS INTO lists ######
-post '/new' do
 
+post '/new' do
+  binding.pry
+  list = []
+  params.each do |item, value|
+    list << item
+  end
+  new_list(list)
   redirect '/lists'
 end
 
@@ -124,7 +135,6 @@ get '/new_item' do
   erb :'items/new'
 end
 
-###### HAVING TROUBLE CAPTURING SECTION INFO INTO PARAMS
 post '/new_item' do
   item = params[:new_item]
   section_id = params[:section_id]
