@@ -4,7 +4,7 @@
   <label for="list">Select Items: </label>
   <div class="item_list">
     <% @items.each do |item|  %>
-        <input type="checkbox" name="<%= item["item"] %>" value="<%= item["item"] %>"><%= item["item"] %><br/>
+        <input type="checkbox" name="<%= item['item'] %>" value="<%= item['id'] %>"><%= item["item"] %><br/>
     <%end%>
   </div>
   <p class="helper_text">Want to add a different item? You can add a one-time item on the next page or <a href="/new_item">update the default list</a>.</p><br/>

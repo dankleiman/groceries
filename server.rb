@@ -68,14 +68,28 @@ end
 
 def get_all_items
   db_connection do |conn|
-    conn.exec('SELECT items.item, sections.section, items.section_id FROM items
+    conn.exec('SELECT items.item, sections.section, items.section_id, items.id FROM items
       JOIN sections ON items.section_id = sections.id')
   end
 end
 
-def most_recent_list
+def create_new_list
+   db_connection do |conn|
+    conn.exec_params("INSERT INTO lists (created_at) VALUES (NOW())")
+  end
+end
+
+def retrieve_new_list_id
+   db_connection do |conn|
+    conn.exec_params("SELECT lists.id FROM lists ORDER BY created_at DESC LIMIT 1")
+  end
+end
+
+def current_list
   db_connection do |conn|
-    conn.exec('SELECT * FROM lists ORDER BY created_at DESC LIMIT 1')
+    conn.exec('SELECT items.item FROM itemlist
+                JOIN items ON itemlist.item_id = items.id
+                JOIN lists ON itemlist.list_id = lists.id ORDER BY itemlist.list_id')
   end
 end
 
@@ -85,17 +99,16 @@ def add_new_item(item, section_id)
   end
 end
 
-def new_list(list_of_items)
-  db_connection do |conn|
-    conn.exec_params("INSERT INTO lists (items, created_at) VALUES ($1, NOW())", [list_of_items])
-  end
-end
-
 def section_list
   db_connection do |conn|
     conn.exec('SELECT sections.section, sections.id FROM sections')
   end
+end
 
+def add_to_list(item_id, list_id)
+  db_connection do |conn|
+    conn.exec_params("INSERT INTO itemlist (item_id, list_id) VALUES ($1, $2)", [item_id, list_id])
+  end
 end
 
 ############################
@@ -107,7 +120,8 @@ get '/' do
 end
 
 get '/lists' do
-  @items = most_recent_list
+  @list = current_list
+  binding.pry
   erb :'lists/show'
 end
 
@@ -118,13 +132,13 @@ end
 
 
 post '/new' do
+  create_new_list
+  new_list = retrieve_new_list_id.to_a
   binding.pry
-  list = []
   params.each do |item, value|
-    list << item
+    add_to_list(value, new_list[0]["id"])
   end
-  new_list(list)
-  redirect '/lists'
+   redirect '/lists'
 end
 
 

@@ -11,8 +11,13 @@ CREATE TABLE sections (
 
 CREATE TABLE lists (
   id serial PRIMARY KEY,
-  items VARCHAR (5000) NOT NULL,
   created_at TIMESTAMP NOT NULL
+);
+
+CREATE TABLE itemlist (
+  id serial PRIMARY KEY,
+  item_id integer NOT NULL,
+  list_id integer NOT NULL
 );
 
 INSERT INTO sections (section) VALUES ('meat');
