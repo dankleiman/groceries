@@ -87,7 +87,7 @@ end
 
 def section_list
   db_connection do |conn|
-    conn.exec('SELECT sections.section FROM sections')
+    conn.exec('SELECT sections.section, sections.id FROM sections')
   end
 
 end
@@ -107,20 +107,12 @@ end
 
 get '/new' do
   @items = get_all_items
-  # binding.pry
   erb :'lists/new'
 end
 
 #### REWRITE THIS METHOD TO INSERT A NEW SET OF ITEMS INTO lists ######
 post '/new' do
-  CSV.open('public/list.csv', "w") do |csv|
-    csv << ["item"]
-    # INSPECT PARAMS TO SEE WHAT IS BEING CAPTURED
-    params.each do | item_key, item_value|
-    csv << [item_value]
-  end
 
-  end
   redirect '/lists'
 end
 
@@ -132,10 +124,11 @@ get '/new_item' do
   erb :'items/new'
 end
 
-#### REWRITE THIS METHOD TO INSERT A NEW ITEM INTO items ######
+###### HAVING TROUBLE CAPTURING SECTION INFO INTO PARAMS
 post '/new_item' do
   item = params[:new_item]
-  section_id = params[:section]
+  section_id = params[:section_id]
+  binding.pry
   add_new_item(item, section_id)
   redirect '/new_item'
 end

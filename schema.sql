@@ -1,7 +1,7 @@
 CREATE TABLE items (
   id serial PRIMARY KEY,
   item VARCHAR (250) NOT NULL,
-  section_id VARCHAR (250) NOT NULL
+  section_id integer NOT NULL
 );
 
 CREATE TABLE sections (
@@ -37,6 +37,7 @@ INSERT INTO items (item, section_id) VALUES ('blue cheese',2);
 INSERT INTO items (item, section_id) VALUES ('bread',4);
 INSERT INTO items (item, section_id) VALUES ('milk',2);
 
+ALTER TABLE items ALTER COLUMN section_id TYPE numeric(10,2);
 
 
 

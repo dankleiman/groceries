@@ -4,11 +4,11 @@
   <label for="list">Select Items: </label>
   <div class="item_list">
     <% @items.each do |item|  %>
-      <% item[:items].each do |item| %>
-        <input type="checkbox" name="<%=item%>" value="<%=item%>"><%=item%><br/>
-      <%end%>
+        <input type="checkbox" name="<%= item["item"] %>" value="<%= item["item"] %>"><%= item["item"] %><br/>
     <%end%>
   </div>
   <p class="helper_text">Want to add a different item? You can add a one-time item on the next page or <a href="/new_item">update the default list</a>.</p><br/>
   <input type="submit" value="Create a New List"/>
 </form>
+
+

@@ -6,12 +6,12 @@
     <label for="new_item">New Item:</label>
     <input type="text" name="new_item" value="<%=params[:new_item]%>"/>
   </div>
-
+<!-- Can't capture section info in params -->
   <div>
     <label for="section">Add to Section:</label>
-    <select name="section">
-    <% @items.each do |item| %>
-    <option value="<%=item["section"]%>"><%=item["section"].capitalize%></option>
+    <select name="section_id">
+    <% @sections.each do |section| %>
+    <option value="<%=section["id"]%>"><%=section["section"].capitalize%></option>
     <%end%>
     </select>
   </div>
