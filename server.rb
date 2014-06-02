@@ -89,7 +89,7 @@ def current_list
   db_connection do |conn|
     conn.exec('SELECT items.item FROM itemlist
                 JOIN items ON itemlist.item_id = items.id
-                JOIN lists ON itemlist.list_id = lists.id ORDER BY itemlist.list_id')
+                JOIN lists ON itemlist.list_id = lists.id WHERE itemlist.list_id = (select max(list_id) from itemlist)')
   end
 end
 
