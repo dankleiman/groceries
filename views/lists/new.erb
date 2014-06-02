@@ -1,13 +1,22 @@
-<h1>Start a New List</h1>
+<nav class="nav_container">
+  <ul class="nav">
+    <li><a href="/">Home</a></li>
+    <li><a href="/lists">See Current List</a></li>
+    <li><a href="/new_item">Add a New Default Item</a></li>
+  </ul>
+</nav>
 
-<form action="/new" method="post">
-  <label for="list">Select Items: </label>
-  <div class="item_list">
-    <% @items.each do |item|  %>
-        <input type="checkbox" name="<%= item['item'] %>" value="<%= item['id'] %>"><%= item["item"] %><br/>
-    <%end%>
-  </div>
-  <input type="submit" value="Create a New List"/>
-</form>
+<div class="content">
+  <h1>Start a New List</h1>
 
+  <form action="/new" method="post">
+    <label for="list">Select Items: </label>
+    <div class="item_list">
+      <% @items.each do |item|  %>
+          <input type="checkbox" name="<%= item['item'] %>" value="<%= item['id'] %>"><%= item["item"] %><br/>
+      <%end%>
+    </div>
+    <input type="submit" value="Create a New List"/>
+  </form>
+</div>
 

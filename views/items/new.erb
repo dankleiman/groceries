@@ -1,39 +1,47 @@
-<h1>Update Current Default List</h1>
-
-
-<form action="/new_item" method="post">
-  <div>
-    <label for="new_item">New Item:</label>
-    <input type="text" name="new_item" value="<%=params[:new_item]%>"/>
-  </div>
-<!-- Can't capture section info in params -->
-  <div>
-    <label for="section">Add to Section:</label>
-    <select name="section_id">
-    <% @sections.each do |section| %>
-    <option value="<%=section["id"]%>"><%=section["section"].capitalize%></option>
-    <%end%>
-    </select>
-  </div>
-
-  <div>
-  <input type="submit" value="Add a New Item"/>
-  </div>
-</form>
-
-
-<h2>Current Default List</h2>
-<% @sections.each do |section| %>
-  <h3><%=section["section"].capitalize%></h3>
-  <%@items.each do |item|%>
-  <ul>
-    <%if section["section"] == item["section"]%>
-    <li><%= item["item"] %></li>
-    <%end%>
+<nav class="nav_container">
+  <ul class="nav">
+    <li><a href="/">Home</a></li>
+    <li><a href="/lists">See Current List</a></li>
+    <li><a href="/new">Start a New List</a></li>
   </ul>
-  <%end%>
-<%end%>
+</nav>
+<div class="content">
+  <h1>Update Current Default List</h1>
 
+
+  <form action="/new_item" method="post">
+    <div>
+      <label for="new_item">New Item:</label>
+      <input type="text" name="new_item" value="<%=params[:new_item]%>"/>
+    </div>
+  <!-- Can't capture section info in params -->
+    <div>
+      <label for="section">Add to Section:</label>
+      <select name="section_id">
+      <% @sections.each do |section| %>
+      <option value="<%=section["id"]%>"><%=section["section"].capitalize%></option>
+      <%end%>
+      </select>
+    </div>
+
+    <div>
+    <input type="submit" value="Add a New Item"/>
+    </div>
+  </form>
+
+
+  <h2>Current Default List</h2>
+  <% @sections.each do |section| %>
+    <h3><%=section["section"].capitalize%></h3>
+    <%@items.each do |item|%>
+    <ul>
+      <%if section["section"] == item["section"]%>
+      <li><%= item["item"] %></li>
+      <%end%>
+    </ul>
+    <%end%>
+  <%end%>
+</div>
 
 
 
