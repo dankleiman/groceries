@@ -29,11 +29,15 @@ INSERT INTO sections (section) VALUES ('meat');
 INSERT INTO sections (section) VALUES ('bakery');
 INSERT INTO sections (section) VALUES ('aisles');
 INSERT INTO sections (section) VALUES ('other');
+INSERT INTO sections (section) VALUES ('produce');
+INSERT INTO sections (section) VALUES ('dairy');
 
 INSERT INTO items (item, section_id) VALUES ('bananas',1);
 INSERT INTO items (item, section_id) VALUES ('blueberries',1);
 INSERT INTO items (item, section_id) VALUES ('avocados',1);
 INSERT INTO items (item, section_id) VALUES ('cabbage',1);
+INSERT INTO items (item, section_id) VALUES ('broccoli',1);
+INSERT INTO items (item, section_id) VALUES ('spinach',1);
 INSERT INTO items (item, section_id) VALUES ('coffee',6);
 INSERT INTO items (item, section_id) VALUES ('eggs',2);
 INSERT INTO items (item, section_id) VALUES ('yogurt',2);
