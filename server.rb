@@ -1,6 +1,5 @@
 require 'sinatra'
 require 'csv'
-require 'pry'
 require 'pg'
 
 
@@ -18,40 +17,6 @@ configure :development do
   set :db_connection_info, {dbname: 'groceries'}
 end
 
-############################
-#       CSV METHODS        #
-############################
-
-# def get_default_list
-#   items = []
-#   items_by_section = []
-#   area_in_store = ['produce', 'meat', 'dairy', 'aisles', 'bakery', 'other']
-#   CSV.foreach('public/groceries.csv', headers: true, header_converters: :symbol) do |item|
-#     items << item.to_hash
-#   end
-
-#   i = 0
-#   area_in_store.each do |section|
-#   #look at one section at a time and match all items to it
-#     sorted_items = []
-#     items.each do |item|
-#     #for each item, add it to the sorted_items hash for its section
-#       if item[:section] == section
-#        sorted_items << item[:item]
-#       end
-#     end
-#     items_by_section << {:section => section, :items => sorted_items}
-#   end
-#   items_by_section
-# end
-
-# def get_new_list
-#   items = []
-#   CSV.foreach('public/list.csv', headers: true, header_converters: :symbol) do |item|
-#     items << item
-#   end
-#   items
-# end
 
 ############################
 #        PG METHODS        #
@@ -87,7 +52,7 @@ end
 
 def current_list
   db_connection do |conn|
-    conn.exec('SELECT items.item FROM itemlist
+    conn.exec('SELECT items.item, items.id FROM itemlist
                 JOIN items ON itemlist.item_id = items.id
                 JOIN lists ON itemlist.list_id = lists.id WHERE itemlist.list_id = (select max(list_id) from itemlist)')
   end
@@ -121,7 +86,6 @@ end
 
 get '/lists' do
   @list = current_list
-  binding.pry
   erb :'lists/show'
 end
 
@@ -134,7 +98,6 @@ end
 post '/new' do
   create_new_list
   new_list = retrieve_new_list_id.to_a
-  binding.pry
   params.each do |item, value|
     add_to_list(value, new_list[0]["id"])
   end
@@ -145,23 +108,13 @@ end
 get '/new_item' do
   @items = get_all_items
   @sections = section_list
-  binding.pry
   erb :'items/new'
 end
 
 post '/new_item' do
   item = params[:new_item]
   section_id = params[:section_id]
-  binding.pry
   add_new_item(item, section_id)
   redirect '/new_item'
-end
-
-### ADDS ITEM TO CURRENT LIST #######
-### REWRITE TO UPDATE MOST RECENT LIST ARRAY #######
-post '/temp_item' do
-  item = params[:new_item]
-  CSV.open('public/list.csv', "a") {|csv| csv << [item]}
-  redirect '/lists'
 end
 

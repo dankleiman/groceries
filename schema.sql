@@ -20,6 +20,11 @@ CREATE TABLE itemlist (
   list_id integer NOT NULL
 );
 
+
+'SELECT items.item, sections.section FROM itemlist
+  JOIN items ON itemlist.item_id = items.id
+  JOIN list ON itemlist.list_id = lists.id ORDER BY lists.created_at DESC LIMIT 1'
+
 INSERT INTO sections (section) VALUES ('meat');
 INSERT INTO sections (section) VALUES ('bakery');
 INSERT INTO sections (section) VALUES ('aisles');
