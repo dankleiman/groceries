@@ -11,7 +11,7 @@
     <label for="section">Add to Section:</label>
     <select name="section">
     <% @items.each do |item| %>
-    <option value="<%=item[:section]%>"><%=item[:section].capitalize%></option>
+    <option value="<%=item["section"]%>"><%=item["section"].capitalize%></option>
     <%end%>
     </select>
   </div>
@@ -23,11 +23,13 @@
 
 
 <h2>Current Default List</h2>
-<% @items.each do |item| %>
-<h3><%=item[:section].capitalize%></h3>
-  <%item[:items].each do |item|%>
+<% @sections.each do |section| %>
+  <h3><%=section["section"].capitalize%></h3>
+  <%@items.each do |item|%>
   <ul>
-    <li><%=item%></li>
+    <%if section["section"] == item["section"]%>
+    <li><%= item["item"] %></li>
+    <%end%>
   </ul>
   <%end%>
 <%end%>
